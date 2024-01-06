@@ -19,9 +19,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('Products', ProductController::class)->only([
+Route::get('products', [ProductController::class,'index'])->name("products.index");
+Route::get('products/{product}', [ProductController::class,'show'])->name("products.show");
+Route::get('products/create', [ProductController::class,'create'])->name("products.create");
+Route::post('products', [ProductController::class,'store'])->name("products.store");
+Route::get('products/{product}/edit', [ProductController::class,'edit'])->name("products.edit");
+Route::patch('products/{product}', [ProductController::class,'update'])->name("products.update");
+Route::delete('products/{product}', [ProductController::class,'destroy'])->name("products.destroy");
+
+/*
+ Route::resource('Products', ProductController::class)->only([
     'index', 'show', 'store', 'update', 'destroy'
 ]);
+*/
 
 /* 路由名稱所用的URL、HTTP方法(或稱HTTP動詞)、與所串接的控制器&方法：
    product.index    GET        /                         Productontroller@index    顯示所有商品
